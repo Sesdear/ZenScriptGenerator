@@ -476,7 +476,7 @@
         <string>Remove item</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="removeLine">
        <property name="geometry">
         <rect>
          <x>110</x>

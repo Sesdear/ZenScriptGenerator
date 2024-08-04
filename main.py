@@ -1,7 +1,6 @@
 import json
 import os
 import sys
-
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QFrame, QMessageBox
 
@@ -13,6 +12,7 @@ class Window(QFrame):
         self.show()
         self.ui.saveButton.clicked.connect(self.click_saveButton)
         self.ui.clearButton.clicked.connect(self.click_clearButton)
+        self.ui.saveRemoveButton.clicked.connect(self.click_saveRemoveButton)
 
         # Список для полей ввода и SpinBox
         self.text_fields = [
@@ -44,69 +44,78 @@ class Window(QFrame):
             self.ui.assemblerSpinBox12
         ]
 
+    def _get_config(self):
+        config_file_path = "config.json"
+        if not os.path.exists(config_file_path):
+            QMessageBox.critical(self, "Ошибка", f"Файл конфигурации '{config_file_path}' не найден.")
+            return None
+
+        with open(config_file_path, "r") as configFile:
+            return json.load(configFile)
+
+    def _write_to_file(self, content):
+        config = self._get_config()
+        if config is None:
+            return
+
+        folder_path = config.get("folder_path")
+        if not folder_path:
+            QMessageBox.critical(self, "Ошибка", "Конфигурация не содержит путь к папке.")
+            return
+
+        if not os.path.exists(folder_path):
+            try:
+                os.makedirs(folder_path)
+            except OSError as e:
+                QMessageBox.critical(self, "Ошибка", f"Не удалось создать папку: {str(e)}")
+                return
+
+        file_path = os.path.join(folder_path, "GenerateScript.zs")
+        try:
+            if os.path.exists(file_path):
+                with open(file_path, "r") as file:
+                    existing_content = file.read()
+                new_content = existing_content + "\n" + content
+            else:
+                new_content = content
+
+            with open(file_path, "w") as file:
+                file.write(new_content)
+
+            QMessageBox.information(self, "Успех", f"Скрипт сохранен в {file_path}")
+        except IOError as e:
+            QMessageBox.critical(self, "Ошибка", f"Произошла ошибка при записи файла: {str(e)}")
+
     def click_saveButton(self):
         try:
             # Получение данных из полей ввода и SpinBox
-            input_items = []
-            for text_field, spinbox in zip(self.text_fields, self.spinbox_values):
-                text = text_field.text().strip()  # Удаление пробелов по краям
-                count = spinbox.value()
-                if text:
-                    if count > 0:
-                        input_items.append(f"{text}*{count}")
-                    else:
-                        input_items.append(text)
+            input_items = [
+                f"{text_field.text().strip()}*{spinbox.value()}" if spinbox.value() > 0 else text_field.text().strip()
+                for text_field, spinbox in zip(self.text_fields, self.spinbox_values)
+                if text_field.text().strip()
+            ]
 
-            # Формирование строки для `inputs`
             inputs_string = ', '.join(input_items) if input_items else "[]"
-
-            # Получение дополнительных данных
             output_item = self.ui.assemblerLineOutput.text().strip()
             if not output_item:
                 QMessageBox.critical(self, "Ошибка", "Выходной предмет не указан.")
                 return
 
             int_duration = self.ui.intDurationSpinBox.value()
-
-            # Формирование текста для добавления
             new_recipe = f"mods.ntm.Assembler.addRecipe({output_item}, [{inputs_string}], {int_duration});"
+            self._write_to_file(new_recipe)
+        except Exception as e:
+            QMessageBox.critical(self, "Ошибка", f"Произошла ошибка: {str(e)}")
 
-            # Получение конфигураций из config.json
-            config_file_path = "config.json"
-            if not os.path.exists(config_file_path):
-                QMessageBox.critical(self, "Ошибка", f"Файл конфигурации '{config_file_path}' не найден.")
+    def click_saveRemoveButton(self):
+        try:
+            output_item = self.ui.removeLine.text().strip()
+            if not output_item:
+                QMessageBox.critical(self, "Ошибка", "Предмет на удаление не указан.")
                 return
 
-            with open(config_file_path, "r") as configFile:
-                config = json.load(configFile)
-
-            folder_path = config.get("folder_path")
-            if not folder_path:
-                QMessageBox.critical(self, "Ошибка", "Конфигурация не содержит путь к папке.")
-                return
-
-            if not os.path.exists(folder_path):
-                os.makedirs(folder_path)
-
-            file_path = os.path.join(folder_path, "GenerateScript.zs")
-
-            # Запись текста в файл
-            if os.path.exists(file_path):
-                # Чтение существующего содержимого
-                with open(file_path, "r") as file:
-                    existing_content = file.read()
-                # Добавление нового рецепта
-                new_content = existing_content + "\n" + new_recipe
-            else:
-                # Создание нового файла с единственным рецептом
-                new_content = new_recipe
-
-            # Запись обновленного содержимого в файл
-            with open(file_path, "w") as file:
-                file.write(new_content)
-
-            QMessageBox.information(self, "Успех", f"Скрипт сохранен в {file_path}")
-
+            new_remove_recipe = f"mods.ntm.Assembler.removeRecipe({output_item});"
+            self._write_to_file(new_remove_recipe)
         except Exception as e:
             QMessageBox.critical(self, "Ошибка", f"Произошла ошибка: {str(e)}")
 
