@@ -60,6 +60,11 @@
      <height>211</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QTabWidget::tab-bar {
+   border: 1px solid gray;
+}</string>
+   </property>
    <property name="currentIndex">
     <number>1</number>
    </property>
@@ -97,8 +102,28 @@
        <x>0</x>
        <y>10</y>
        <width>381</width>
-       <height>171</height>
+       <height>181</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTabBar::tab {
+    border: 2px solid #C4C4C3;
+    border-bottom-color: #C2C7CB;
+    min-width: 16ex;
+    padding: 2px;
+}
+ 
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: #6c6c6c;
+}
+ 
+QTabBar::tab:selected {
+    border-bottom-color: #6c6c6c;
+}
+ 
+QTabBar::tab:!selected {
+    margin-top: 2px;
+}</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -476,7 +501,7 @@
         <string>Remove item</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="removeLine">
        <property name="geometry">
         <rect>
          <x>110</x>
@@ -504,6 +529,357 @@
       <attribute name="title">
        <string>replace</string>
       </attribute>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox4">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>60</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine12">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>100</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox11">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox5">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>80</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceIntDurationSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>120</y>
+         <width>61</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>1000000000</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine7">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>0</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>120</y>
+         <width>71</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Int duration</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine1">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine8">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>20</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox8">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="replaceClearButton">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>40</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Clear</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox6">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>100</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox12">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>100</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine10">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>60</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox3">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>40</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLineOutput">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>120</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox1">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>0</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox9">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>40</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="replaceSaveButton">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>80</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox2">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine9">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>40</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox10">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>60</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="replaceAssemblerLine11">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>80</y>
+         <width>113</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Item Output:</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="replaceAssemblerSpinBox7">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>0</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>64</number>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
